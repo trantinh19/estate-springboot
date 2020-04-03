@@ -24,11 +24,13 @@ public class BuildingController {
 
     @GetMapping()
     public Page<BuildingDTO> showBuilding(@RequestParam Map<String, String> model,
+                                          @RequestParam String[] buildingTypes,
                                           @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-                                          @RequestParam(value = "size", defaultValue = "2", required = false) int size) {
+                                          @RequestParam(value = "size", defaultValue = "2", required = false) int size){
         BuildingSearchBuilder buildingSearchBuilder = BuildingSearchBuilder.builder()
                 .name(model.get("name"))
                 .district(model.get("district")).buildingArea(model.get("buildingArea"))
+                .buildingTypes(buildingTypes)
                 .street(model.get("street")).ward(model.get("ward")).numberOfBasement(model.get("numberOfBasement"))
                 .costRentFrom(model.get("costRentFrom")).costRentTo(model.get("costRentTo"))
                 .areaFrom(model.get("areaFrom")).areaTo(model.get("areaTo")).staffId(model.get("staffId"))
