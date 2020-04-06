@@ -2,9 +2,9 @@ package com.example.demo.enums;
 
 public enum BuildingTypes {
 
-    TANG_TRET("Tầng trệt"),
-    NGUYEN_CAN("Nguyên căn"),
-    NOI_THAT("Nội thất");
+    TANG_TRET("Tầng Trệt"),
+    NGUYEN_CAN("Nguyên Căn"),
+    NOI_THAT("Nội Thất");
 
     private final String value;
 

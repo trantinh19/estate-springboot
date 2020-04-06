@@ -1,15 +1,16 @@
 package com.example.demo.controller;
 
 import com.example.demo.builder.BuildingSearchBuilder;
+import com.example.demo.config.security.annotation.authorities.IsAdmin;
 import com.example.demo.dto.BuildingDTO;
-import com.example.demo.entity.Building;
-import com.example.demo.service.BuildingService;
+import com.example.demo.entity.User;
+import com.example.demo.service.building.BuildingService;
 import com.example.demo.util.PageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,11 +27,14 @@ public class BuildingController {
     @Autowired
     private BuildingService buildingService;
 
-    @GetMapping()
-    public PageResponse<BuildingDTO> showBuilding(@RequestParam Map<String, String> model,
+    @GetMapping("/admin")
+    @IsAdmin
+    public PageResponse<BuildingDTO> showBuilding(UsernamePasswordAuthenticationToken principal,
+            @RequestParam Map<String, String> model,
                                      @RequestParam String[] buildingTypes,
                                      @RequestParam(value = "page", defaultValue = "1", required = false) int page,
                                      @RequestParam(value = "size", defaultValue = "2", required = false) int size){
+        User user = (User) principal.getPrincipal();
         BuildingSearchBuilder buildingSearchBuilder = BuildingSearchBuilder.builder()
                 .name(model.get("name"))
                 .district(model.get("district")).buildingArea(model.get("buildingArea"))

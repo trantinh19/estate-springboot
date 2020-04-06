@@ -1,12 +1,12 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.building.impl;
 
 import com.example.demo.builder.BuildingSearchBuilder;
 import com.example.demo.dto.BuildingDTO;
 import com.example.demo.entity.Building;
 import com.example.demo.enums.BuildingTypes;
 import com.example.demo.enums.Districts;
-import com.example.demo.repository.BuildingRepository;
-import com.example.demo.service.BuildingService;
+import com.example.demo.repository.building.BuildingRepository;
+import com.example.demo.service.building.BuildingService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

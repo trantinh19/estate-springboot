@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.repository.building;
 
 import com.example.demo.builder.BuildingSearchBuilder;
 import com.example.demo.entity.Building;

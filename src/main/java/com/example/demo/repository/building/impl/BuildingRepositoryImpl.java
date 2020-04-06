@@ -1,8 +1,8 @@
-package com.example.demo.repository.impl;
+package com.example.demo.repository.building.impl;
 
 import com.example.demo.builder.BuildingSearchBuilder;
 import com.example.demo.entity.Building;
-import com.example.demo.repository.BuildingRepositoryCustom;
+import com.example.demo.repository.building.BuildingRepositoryCustom;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;
