@@ -53,8 +53,9 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         if(StringUtils.isNotBlank(buildingSearchBuilder.getNumberOfBasement())) wheres.add("b.number_of_basement = :numberOfBasement");
         if(StringUtils.isNotBlank(buildingSearchBuilder.getCostRentFrom())) wheres.add("b.cost_rent >= :cosRentFrom");
         if(StringUtils.isNotBlank(buildingSearchBuilder.getCostRentTo())) wheres.add("b.cost_rent <= :cosRentTo");
-        if(StringUtils.isNotBlank(buildingSearchBuilder.getAreaFrom())) wheres.add("b.areaFrom >= :areaFrom");
-        if(StringUtils.isNotBlank(buildingSearchBuilder.getAreaTo())) wheres.add("b.areaTo <= :areaTo");
+        if (StringUtils.isNotBlank(buildingSearchBuilder.getAreaFrom()) || StringUtils.isNotBlank(buildingSearchBuilder.getAreaFrom())) {
+            wheres.add("EXISTS (SELECT * FROM rent_area as ra WHERE ( ra.building_id = b.id and ra.value >= :areaFrom and ra.value <= :areaTo))");
+        }
         if(buildingSearchBuilder.getBuildingTypes().length > 0) {
             String s = Arrays.stream(buildingSearchBuilder.getBuildingTypes())
                     .map(e->"b.type LIKE '%"+e+"%'").collect(Collectors.joining(" OR "));
@@ -110,11 +111,9 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
             query.setParameter("cosRentTo", buildingSearchBuilder.getCostRentTo());
             countQuery.setParameter("cosRentTo", buildingSearchBuilder.getCostRentTo());
         }
-        if(StringUtils.isNotBlank(buildingSearchBuilder.getAreaFrom())) {
+        if(StringUtils.isNotBlank(buildingSearchBuilder.getAreaFrom()) || StringUtils.isNotBlank(buildingSearchBuilder.getAreaTo())) {
             query.setParameter("areaFrom", buildingSearchBuilder.getAreaFrom());
             countQuery.setParameter("areaFrom", buildingSearchBuilder.getAreaFrom());
-        }
-        if(StringUtils.isNotBlank(buildingSearchBuilder.getAreaTo())) {
             query.setParameter("areaTo", buildingSearchBuilder.getAreaTo());
             countQuery.setParameter("areaTo", buildingSearchBuilder.getAreaTo());
         }
@@ -122,7 +121,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
             query.setParameter("staffId", buildingSearchBuilder.getStaffId());
             countQuery.setParameter("staffId", buildingSearchBuilder.getStaffId());
         }
-//        if(buildingSearchBuilder.getBuildingTypes().length > 0) {
+//        if(buildingSearchBuilder.getBuildingTypes().length > 0 && StringUtils.isNotBlank(fieldSearch.getBuildingTypes()[0])) {
 //            query.setParameter("buildingTypes", buildingSearchBuilder.getBuildingTypes());
 //            countQuery.setParameter("buildingTypes", buildingSearchBuilder.getBuildingTypes());
 //        }

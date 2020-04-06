@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.builder.BuildingSearchBuilder;
 import com.example.demo.dto.BuildingDTO;
+import com.example.demo.entity.Building;
 import com.example.demo.service.BuildingService;
+import com.example.demo.util.PageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,10 +27,10 @@ public class BuildingController {
     private BuildingService buildingService;
 
     @GetMapping()
-    public Page<BuildingDTO> showBuilding(@RequestParam Map<String, String> model,
-                                          @RequestParam String[] buildingTypes,
-                                          @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-                                          @RequestParam(value = "size", defaultValue = "2", required = false) int size){
+    public PageResponse<BuildingDTO> showBuilding(@RequestParam Map<String, String> model,
+                                     @RequestParam String[] buildingTypes,
+                                     @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+                                     @RequestParam(value = "size", defaultValue = "2", required = false) int size){
         BuildingSearchBuilder buildingSearchBuilder = BuildingSearchBuilder.builder()
                 .name(model.get("name"))
                 .district(model.get("district")).buildingArea(model.get("buildingArea"))
@@ -37,9 +41,14 @@ public class BuildingController {
                 .build();
         Pageable pageable = PageRequest.of(page - 1 , size);
         Page<BuildingDTO> response = this.buildingService.findAll(buildingSearchBuilder, pageable);
+        List<BuildingDTO> result = response.getContent();
+        if(result == null || result.size() < 0) result = Collections.EMPTY_LIST;
+        return new PageResponse<>(result, response.getTotalPages(), response.getTotalElements(), page, size);
+    }
 
-        return new PageImpl<>(response.getContent(), pageable, response.getTotalElements());
-
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
     }
 
 }
