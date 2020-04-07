@@ -35,13 +35,13 @@ public class User extends AbstractEntity {
     private String email;
 
     @Column(name = "user_name")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "full_name")
-    private String fullName;
+    private String fullname;
 
     @Column(name = "status")
     private int status;
