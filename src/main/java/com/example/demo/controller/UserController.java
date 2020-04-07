@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.config.security.annotation.authorities.IsAdmin;
-import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.UserDTO;
-import com.example.demo.dto.UserInfoRequest;
+import com.example.demo.dto.request.UserInfoRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.user.UserRepository;
 import com.example.demo.service.user.UserService;
@@ -15,9 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;

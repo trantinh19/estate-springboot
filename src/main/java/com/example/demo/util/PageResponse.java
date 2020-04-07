@@ -8,7 +8,7 @@ import java.util.List;
 public class PageResponse<T> {
     @JsonProperty("total_pages")
     private int totalPages;
-    @JsonProperty("total_elements")
+    @JsonProperty("total_records")
     private long totalElements;
     private int page;
     private int size;
