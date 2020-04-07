@@ -51,11 +51,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-//                .antMatchers("/api/building/admin/**")
-//                    .hasRole("MANAGER")
+                .antMatchers("/api/building/admin/**")
+                    .hasRole("MANAGER")
                 .antMatchers(HttpMethod.POST, "/api/user/auth/**")
                     .permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                    .and()
+                .httpBasic();
     }
 
     @Bean

@@ -29,12 +29,11 @@ public class BuildingController {
 
     @GetMapping("/admin")
     @IsAdmin
-    public PageResponse<BuildingDTO> showBuilding(UsernamePasswordAuthenticationToken principal,
+    public PageResponse<BuildingDTO> showBuilding(
             @RequestParam Map<String, String> model,
                                      @RequestParam String[] buildingTypes,
                                      @RequestParam(value = "page", defaultValue = "1", required = false) int page,
                                      @RequestParam(value = "size", defaultValue = "2", required = false) int size){
-        User user = (User) principal.getPrincipal();
         BuildingSearchBuilder buildingSearchBuilder = BuildingSearchBuilder.builder()
                 .name(model.get("name"))
                 .district(model.get("district")).buildingArea(model.get("buildingArea"))
