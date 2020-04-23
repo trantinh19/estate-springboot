@@ -16,3 +16,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
+
+app:
+  jwtSecret: JWTSuperSecretKey
+app2:
+  jwtExpirationInMs: 604800000

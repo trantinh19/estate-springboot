@@ -1,4 +1,4 @@
-package com.example.demo.config.security.annotation.authorities;
+package com.example.demo.config.security.annotation;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasRole('ROLE_VIEW')")
-public @interface IsViewAble {
+@PreAuthorize("hasRole('ROLE_MANAGER')")
+public @interface IsAdmin {
 }

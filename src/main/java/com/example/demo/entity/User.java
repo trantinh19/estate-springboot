@@ -37,6 +37,9 @@ public class User extends AbstractEntity {
     @Column(name = "user_name")
     private String username;
 
+    @Column(name = "nick_name")
+    private String nickname;
+
     @Column(name = "password")
     private String password;
 
@@ -56,7 +59,7 @@ public class User extends AbstractEntity {
     @ManyToMany(mappedBy = "staffs")
     private Collection<Building> buildings = new HashSet<>();
 
-    public Collection < Role > getRoles() {
+    public Collection <Role> getRoles() {
         return roles;
     }
 

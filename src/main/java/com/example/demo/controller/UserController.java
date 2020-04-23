@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.config.security.annotation.authorities.IsAdmin;
+import com.example.demo.config.security.annotation.IsAdmin;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.dto.request.UserInfoRequest;
 import com.example.demo.entity.User;
@@ -40,7 +40,7 @@ public class UserController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/auth/registration")
+    @PostMapping("/registration")
     public ResponseEntity<?> registrationUserAccount(@RequestBody UserDTO userDTO) {
         User existing = this.userService.findByEmail(userDTO.getEmail());
         if(existing != null) throw new RuntimeException(" Email was existed");
@@ -49,7 +49,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("auth/profile")
+    @GetMapping("/profile")
     @IsAdmin
     public PageResponse<UserDTO> findAll(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
                                          @RequestParam(value = "size", defaultValue = "10", required = false) int size){
@@ -59,7 +59,7 @@ public class UserController {
         return new PageResponse<>(result, response.getTotalPages(), response.getTotalElements(), page, size);
     }
 
-    @PutMapping("auth/profile")
+    @PutMapping("/profile")
     @IsAdmin
     public ResponseEntity<?> updateProfile(@Valid @RequestBody UserInfoRequest request) {
         User oldUser = this.userService.findByEmail(request.getEmail());

@@ -1,7 +1,5 @@
 package com.example.demo.config;
 
-import com.example.demo.repository.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -16,9 +14,6 @@ import java.util.Optional;
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class JpaAuditingConfig {
-
-    @Autowired
-    private static UserRepository userRepository;
 
     @Bean
     public AuditorAware<String> auditorProvider() {

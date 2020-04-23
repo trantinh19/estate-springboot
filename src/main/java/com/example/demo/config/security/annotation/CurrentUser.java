@@ -1,4 +1,4 @@
-package com.example.demo.config.security.annotation.authorities;
+package com.example.demo.config.security.annotation;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 

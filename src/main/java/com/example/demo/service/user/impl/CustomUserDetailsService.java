@@ -2,6 +2,7 @@ package com.example.demo.service.user.impl;
 
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.user.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,12 +16,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     public static final String ROLE_PREFIX = "ROLE_";
     private final UserRepository userRepository;
 
-    public UserDetailServiceImpl(UserRepository userRepository) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -39,4 +40,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
                     .map(role -> new SimpleGrantedAuthority(ROLE_PREFIX.concat(role.getName())))
                     .collect(Collectors.toList());
     }
+
+//    @Transactional
+//    public UserDetails loadUserById(Long id) {
+//        User user = userRepository.findById(id).orElseThrow(
+//                () -> new ResourceNotFoundException("User", "id", id)
+//        );
+//
+//        return UserPrincipal.create(user);
+//    }
 }

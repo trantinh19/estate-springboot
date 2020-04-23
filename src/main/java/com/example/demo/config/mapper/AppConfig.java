@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

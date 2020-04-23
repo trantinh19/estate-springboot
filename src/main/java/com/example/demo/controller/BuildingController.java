@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.builder.BuildingSearchBuilder;
-import com.example.demo.config.security.annotation.authorities.IsAdmin;
+import com.example.demo.config.security.annotation.IsAdmin;
 import com.example.demo.dto.BuildingDTO;
 import com.example.demo.service.building.BuildingService;
 import com.example.demo.util.PageResponse;
