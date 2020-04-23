@@ -18,6 +18,6 @@ spring:
         format_sql: true
 
 app:
-  jwtSecret: JWTSuperSecretKey
-app2:
-  jwtExpirationInMs: 604800000
+  secretKey: secret
+  expireTime: 300
+  authoritiesKey: scopes

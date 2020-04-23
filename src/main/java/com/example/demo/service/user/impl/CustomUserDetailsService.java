@@ -41,12 +41,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                     .collect(Collectors.toList());
     }
 
-//    @Transactional
-//    public UserDetails loadUserById(Long id) {
-//        User user = userRepository.findById(id).orElseThrow(
-//                () -> new ResourceNotFoundException("User", "id", id)
-//        );
-//
-//        return UserPrincipal.create(user);
-//    }
 }
